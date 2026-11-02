@@ -26,10 +26,68 @@
     overscroll-behavior: contain;
   }
 
+  /* Native <dialog> animations via Modern CSS: @starting-style & allow-discrete */
+  dialog {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.2s ease,
+                display 0.25s allow-discrete,
+                overlay 0.25s allow-discrete;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  dialog[open] {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @starting-style {
+    dialog[open] {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
+  @media (min-width: 640px) {
+    dialog {
+      transform: scale(0.96);
+    }
+    dialog[open] {
+      transform: scale(1);
+    }
+    @starting-style {
+      dialog[open] {
+        transform: scale(0.96);
+      }
+    }
+  }
+
   dialog::backdrop {
     overflow: hidden;
     overscroll-behavior: contain;
     background: rgba(28, 36, 32, 0.45);
     backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.25s ease,
+                display 0.25s allow-discrete,
+                overlay 0.25s allow-discrete;
+  }
+
+  dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog,
+    dialog::backdrop {
+      transition: none !important;
+      transform: none !important;
+    }
   }
 }

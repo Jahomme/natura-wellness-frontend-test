@@ -14,7 +14,7 @@ export interface ModalDialogProps {
 /**
  * Accessible native `<dialog>` modal using `.showModal()`.
  * Styled mobile-first as a thumb-zone bottom sheet (with safe-area inset padding) on <640px phones,
- * transitioning to a centered BuyBox-framed card (`rounded-frame`, `#E7E1D6` border) on `sm:`+.
+ * with smooth CSS slide-up/slide-down transitions, transitioning to a centered card on `sm:`+.
  */
 export function ModalDialog({
   isOpen,
@@ -60,13 +60,16 @@ export function ModalDialog({
       aria-labelledby={titleId}
       aria-describedby={description ? descId : undefined}
       onCancel={handleCancel}
-      onClose={() => {
-        if (isOpen && !preventClose) onClose();
-      }}
       onClick={handleBackdropClick}
       className="p-0 bg-transparent text-brand-ink w-full max-w-none sm:max-w-md mx-auto mt-auto mb-0 sm:my-auto rounded-t-frame sm:rounded-frame overflow-visible"
     >
       <div className="bg-white border border-brand-border rounded-t-frame sm:rounded-frame p-5 sm:p-6 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pb-6 shadow-card space-y-4">
+        {/* Mobile bottom-sheet grab handle */}
+        <div
+          className="w-10 h-1 bg-brand-border rounded-full mx-auto -mt-1 mb-2 sm:hidden"
+          aria-hidden="true"
+        />
+
         <div className="flex items-start justify-between gap-3">
           <h2 id={titleId} className="font-serif text-xl font-semibold text-brand-forest leading-snug">
             {title}
