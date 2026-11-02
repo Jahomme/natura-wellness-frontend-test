@@ -27,7 +27,7 @@ export function BuyBox() {
     : copy.oneTime.priceCents;
   const totalFormatted = formatCents(activeUnitPriceCents * quantity);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
