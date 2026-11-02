@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: #FBF8F3;
+    color: #1C2420;
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid #17402F;
+    outline-offset: 2px;
+  }
+
+  /* Prevent scroll gestures over the backdrop or inside the dialog from chaining to the page */
+  dialog:modal {
+    overscroll-behavior: contain;
+  }
+
+  dialog::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+    background: rgba(28, 36, 32, 0.45);
+    backdrop-filter: blur(2px);
+  }
+}
